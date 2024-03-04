@@ -152,7 +152,7 @@ async function run() {
       const proxyEndpoint = authData.proxyEndpoint;
       const registryUri = proxyEndpoint.replace(/^https?:\/\//, '');
 
-      core.info(`2: useFipsEndpoint is: *${useFipsEndpoint}*`);
+      core.info(`2 useFipsEndpoint is ${useFipsEndpoint}`);
       core.info(`Logging into registry ${registryUri}`);
       core.info(`3: useFipsEndpoint is: *${useFipsEndpoint}*`);
 
