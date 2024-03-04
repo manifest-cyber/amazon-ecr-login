@@ -13,7 +13,8 @@ const INPUTS = {
   maskPassword: 'mask-password',
   registries: 'registries',
   registryType: 'registry-type',
-  skipLogout: 'skip-logout'
+  skipLogout: 'skip-logout',
+  useFipsEndpoint: 'use-fips-endpoint'
 };
 
 const OUTPUTS = {
@@ -110,6 +111,11 @@ async function run() {
   const registries = core.getInput(INPUTS.registries, { required: false });
   const registryType = core.getInput(INPUTS.registryType, { required: false }).toLowerCase() || REGISTRY_TYPES.private;
   const skipLogout = core.getInput(INPUTS.skipLogout, { required: false }).toLowerCase() === 'true';
+  const useFipsEndpoint = core.getInput(INPUTS.useFipsEndpoint, { required: false }).toLowerCase() === 'true';
+
+  if(useFipsEndpoint) {
+    process.env['AWS_USE_FIPS_ENDPOINT'] = "true"
+  }
 
   const registryUriState = [];
 
