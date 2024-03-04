@@ -52,6 +52,7 @@ function configureProxy(httpProxy) {
 }
 
 async function getEcrAuthTokenWrapper(ecrClientConfig, authTokenRequest) {
+  core.info('Using private client');
   const ecrClient = new ECRClient(ecrClientConfig);
   const command = new GetAuthorizationTokenCommand(authTokenRequest);
   const authTokenResponse = await ecrClient.send(command);
@@ -67,6 +68,7 @@ async function getEcrAuthTokenWrapper(ecrClientConfig, authTokenRequest) {
 }
 
 async function getEcrPublicAuthTokenWrapper(ecrClientConfig, authTokenRequest) {
+  core.info('Using public client');
   const ecrPublicClient = new ECRPUBLICClient(ecrClientConfig);
   const command = new GetAuthorizationTokenCommandPublic(authTokenRequest);
   const authTokenResponse = await ecrPublicClient.send(command);
@@ -113,6 +115,8 @@ async function run() {
       core.warning('Your docker password is not masked. See https://github.com/aws-actions/amazon-ecr-login#docker-credentials ' +
         'for more information.')
     }
+
+    core.info(`useFipsEndpoint is: *${useFipsEndpoint}*`);
 
     // Configures proxy
     const httpsProxyAgent = configureProxy(httpProxy);
