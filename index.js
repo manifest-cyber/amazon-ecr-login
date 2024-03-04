@@ -116,7 +116,7 @@ async function run() {
         'for more information.')
     }
 
-    core.info(`useFipsEndpoint is: *${useFipsEndpoint}*`);
+    core.info(`1: useFipsEndpoint is: *${useFipsEndpoint}*`);
 
     // Configures proxy
     const httpsProxyAgent = configureProxy(httpProxy);
@@ -152,7 +152,9 @@ async function run() {
       const proxyEndpoint = authData.proxyEndpoint;
       const registryUri = proxyEndpoint.replace(/^https?:\/\//, '');
 
+      core.info(`2: useFipsEndpoint is: *${useFipsEndpoint}*`);
       core.info(`Logging into registry ${registryUri}`);
+      core.info(`3: useFipsEndpoint is: *${useFipsEndpoint}*`);
 
       // output the registry URI if this action is doing a single registry login
       if (authTokenResponse.authorizationData.length === 1) {
